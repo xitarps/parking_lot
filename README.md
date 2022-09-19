@@ -110,19 +110,19 @@ PUT http://127.0.0.1:4567/parking/aaa-1234/out
 
 Create/Park car
 ```
-curl -X POST -d '{"plate": "aaA-4444"}' -H 'Content-type:application/json' http://127.0.0.1:4567/parking
+curl -X POST -d '{"plate": "aaa-4444"}' -H 'Content-type:application/json' http://127.0.0.1:4567/parking
 ```
 See History(per plate)
 ```
-curl http://127.0.0.1:4567/parking/AaA-4444
+curl http://127.0.0.1:4567/parking/aaa-4444
 ```
 Pay
 ```
-curl -X PUT  http://127.0.0.1:4567/parking/aAa-4444/pay
+curl -X PUT -d {} http://127.0.0.1:4567/parking/aaa-4444/pay
 ```
 Out/Leave
 ```
-curl -X PUT http://127.0.0.1:4567/parking/AaA-4444/out
+curl -X PUT -d {} http://127.0.0.1:4567/parking/aaa-4444/out
 ```
 </details>
 
