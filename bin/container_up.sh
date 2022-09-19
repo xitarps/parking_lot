@@ -15,6 +15,12 @@ docker-compose up -d web
 echo '===== Done Building Web app Container ====='
 sleep 2
 
-echo '===== Finishing ====='
+echo '===== Message ====='
+echo
+echo 'All up, system is running :)  Enjoy!! :)'
+echo
+echo '===== Message ====='
+
+echo '===== Attach ====='
 docker-compose up
 echo '===== Finish ====='
