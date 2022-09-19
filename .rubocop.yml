@@ -1,0 +1,23 @@
+require:
+  - rubocop
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1.2
+  SuggestExtensions: false
+
+# Custom
+Style/BlockDelimiters:
+  Enabled: true
+  Exclude:
+    - 'config/routes.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  Exclude:
+    - 'Gemfile'
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
