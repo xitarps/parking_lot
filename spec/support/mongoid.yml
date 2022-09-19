@@ -1,0 +1,12 @@
+development:
+  clients:
+    default:
+      uri: "mongodb://<%= ENV['MONGO_USER'] %>:<%= ENV['MONGO_PASSWORD'] %>@<%= ENV['MONGO_LOCATION'] %>:27017/parking_lot_test"
+      options:
+        # These options are Ruby driver options, documented in
+        # https://mongodb.com/docs/ruby-driver/current/reference/create-client/
+
+        # Change the default write concern. (default = { w: 1 })
+        write:
+          w: 1
+        auth_source: admin
