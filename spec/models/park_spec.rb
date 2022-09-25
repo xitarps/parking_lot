@@ -3,33 +3,32 @@
 require 'spec_helper'
 
 RSpec.describe Park do
-  describe 'should generate a reservation code' do
-    context 'successfully' do
-      it 'when call .generate_code' do
-        expect(Park.new.generate_code).not_to be_empty
+  describe 'when attempt to generate an instance of Park' do
+    context 'call .generate_code' do
+      it 'successfully' do
+        expect(described_class.new.generate_code).not_to be_empty
       end
     end
-  end
 
-  describe 'should attempt to generate an instance of Park' do
-    context 'successfully' do
-      it 'when correct plate format' do
-        park = Park.new(plate: 'aaa-1234')
+    context 'with correct plate format' do
+      it 'be valid ' do
+        park = described_class.new(plate: 'aaa-1234')
         expect(park).to be_valid
       end
     end
-    context 'unsuccessfully' do
-      it 'when wrong plate format' do
-        park = Park.new(plate: 'aaa-123')
+
+    context 'with wrong plate format' do
+      it 'not be valid' do
+        park = described_class.new(plate: 'aaa-123')
         expect(park).not_to be_valid
       end
     end
   end
 
-  describe 'should build details hash from Park object' do
-    let(:park) { Park.create!(plate: 'aaa-1234') }
-    context 'successfully' do
-      it 'when call .fetch_single_details' do
+  describe 'return hash(es)' do
+    let(:park) { described_class.create!(plate: 'aaa-1234') }
+    context 'when call .fetch_single_details' do
+      it 'successfully' do
         single_details = park.fetch_single_details
         expectation = { time: park.send(:fetch_time), paid: park.paid,
                         left: park.left, plate: park.plate,
@@ -37,16 +36,20 @@ RSpec.describe Park do
 
         expect(single_details).to be_eql(expectation)
       end
+    end
 
-      it 'when call .reservation_details' do
+    context 'when call .reservation_details' do
+      it 'successfully' do
         reservation_details = park.fetch_reservation_details
         expectation = { reservation: park.reservation, plate: park.plate,
                         entered_at: park.created_at }
 
         expect(reservation_details).to be_eql(expectation)
       end
+    end
 
-      it 'when call #history' do
+    context 'when call #history' do
+      it 'successfully display array of hashes' do
         3.times { described_class.create!(plate: 'aaa-1234') }
         parks = described_class.where(plate: 'aaa-1234')
         history = described_class.history(parks)
@@ -56,10 +59,10 @@ RSpec.describe Park do
     end
   end
 
-  describe 'should get parking time' do
-    context 'successfully' do
-      it 'when call #fetch_time' do
-        park = Park.create(plate: 'aaa-1234')
+  describe 'get parking time' do
+    context 'when call #fetch_time' do
+      it 'successfully' do
+        park = described_class.create(plate: 'aaa-1234')
         travel_to(20.seconds.from_now) do
           expect(park.send(:fetch_time)).to include('seconds')
         end
